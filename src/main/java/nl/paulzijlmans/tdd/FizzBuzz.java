@@ -1,27 +1,38 @@
 package nl.paulzijlmans.tdd;
 
 public class FizzBuzz {
-    /*
-        If number is divisible by 3, print Fizz
-        If number is divisible by 5, print Buzz
-        If number is divisible by 3 and 5, print FizzBuzz
-        If number is NOT divisible by 3 and 5, print the number
-     */
-
-    public static final String FIZZ = "Fizz";
-    public static final String BUZZ = "Buzz";
-    public static final String FIZZBUZZ = "FizzBuzz";
+    private static final String FIZZ = "Fizz";
+    private static final String BUZZ = "Buzz";
+    private static final String FIZZBUZZ = "FizzBuzz";
+    private static final int FIZZ_DIVISOR = 3;
+    private static final int BUZZ_DIVISOR = 5;
 
     public static String compute(int number) {
-        if ((number % 3 == 0) && (number % 5 == 0)) {
+        if (isDivisibleByThreeAndFive(number)) {
             return FIZZBUZZ;
         }
-        if (number % 3 == 0) {
+        if (isDivisibleByThree(number)) {
             return FIZZ;
         }
-        if (number % 5 == 0) {
+        if (isDivisibleByFive(number)) {
             return BUZZ;
         }
         return String.valueOf(number);
+    }
+
+    private static boolean isDivisibleByThreeAndFive(int number) {
+        return isDivisibleByThree(number) && isDivisibleByFive(number);
+    }
+
+    private static boolean isDivisibleByThree(int number) {
+        return isDivisibleBy(number, FIZZ_DIVISOR);
+    }
+
+    private static boolean isDivisibleByFive(int number) {
+        return isDivisibleBy(number, BUZZ_DIVISOR);
+    }
+
+    private static boolean isDivisibleBy(int number, int divisor) {
+        return number % divisor == 0;
     }
 }
